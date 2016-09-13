@@ -35,9 +35,7 @@ public class Deck {
                 NSString value1 = (NSString) card0.objectForKey("chemistry");
                 NSString value2 = (NSString) card0.objectForKey("classification");
                 NSString value3 = (NSString) card0.objectForKey("crystal_system");
-                //NSString value4 = (NSString) card0.objectForKey("occurrence"); /*value4 +*/
                 NSArray value4 = (NSArray) card0.objectForKey("occurrence");
-                //NSString value41 = (NSString) card0.objectForKey("string");
                 NSString value5 = (NSString) card0.objectForKey("hardness");
                 NSString value6 = (NSString) card0.objectForKey("specific_gravity");
                 NSString value7 = (NSString) card0.objectForKey("cleavage");
@@ -47,7 +45,7 @@ public class Deck {
                 deckArray.add(new MineralCard(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9));
 
             }
-              while (trumpCounter < 59) {
+            while (trumpCounter < 59) {
                 trumpCounter = trumpCounter + 1;
 
                 NSDictionary card1 = (NSDictionary) cardsArray.objectAtIndex(trumpCounter); // index of the cards
@@ -70,3 +68,4 @@ public class Deck {
             System.out.println(i.toString());
         }
     }
+}
