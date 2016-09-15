@@ -9,9 +9,9 @@ import org.xml.sax.*;
 
 import java.text.ParseException;
 import java.io.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collection;
 
 public class Game {
     public static void main(String[] args) throws ParserConfigurationException, ParseException, SAXException, PropertyListFormatException, IOException{
@@ -19,6 +19,20 @@ public class Game {
         ArrayList<Players> playersArray = new ArrayList<>();
         ArrayList<Card> centerCards = new ArrayList<>();
         Scanner input = new Scanner(System.in);
+        //System.out.println(deckInstance.deckArray.get(0).toString());
+        //deckInstance.print();
+
+    }
+    static void Draw(){
+
+    }
+    static void PlayerHand(){
+
+    }
+    static void placeCard(){
+
+    }
+    static void drawCard(){
         
     }
 }

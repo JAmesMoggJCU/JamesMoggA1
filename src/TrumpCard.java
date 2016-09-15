@@ -13,6 +13,6 @@ class TrumpCard extends Card {
 
     @Override
     public String toString() {
-        return ("This Trump Card is " + this.title + " its description is " + this.subtitle);
+        return ("This Trump Card is " + this.title + "\n its description is " + this.subtitle);
     }
 }
