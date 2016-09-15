@@ -1,7 +1,6 @@
 /**
  * Created by moggj_000 on 30/08/2016.
  */
-import com.dd.plist.NSArray;
 import com.dd.plist.NSString;
 
 public class Cards {
