@@ -9,9 +9,7 @@ import org.xml.sax.*;
 
 import java.text.ParseException;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Collection;
+import java.util.*;
 
 public class Game {
     public static void main(String[] args) throws ParserConfigurationException, ParseException, SAXException, PropertyListFormatException, IOException{
@@ -21,18 +19,22 @@ public class Game {
         Scanner input = new Scanner(System.in);
         //System.out.println(deckInstance.deckArray.get(0).toString());
         //deckInstance.print();
-
     }
     static void Draw(){
-
+        
+        //Draw card from top of deck
+        //remove drawn card from top of deck and add card to PlayerHand
     }
     static void PlayerHand(){
-
+        //ArrayList<Players> PlayerHand = new ArrayList<>();
+        //System.out.println(PlayerHand);
+        //Display Players hand
     }
     static void placeCard(){
-
+        //show card that has been played from player hand and remove from player hand
+        //show what category and cards have been played
     }
     static void drawCard(){
-        
+        //if a player has skipped there turn then draw from top of deck
     }
 }
