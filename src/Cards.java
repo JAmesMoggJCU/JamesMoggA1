@@ -3,12 +3,6 @@
  */
 import com.dd.plist.NSString;
 
-public class Cards {
-    public static void main(String[] args) {
-
-    }
-}
-
 class Card{
     NSString title;
 
@@ -17,7 +11,7 @@ class Card{
     }
 
     public String toString() {
-        return ("This element is " + this.title);
+        return ("Name " + this.title);
     }
 
 }
