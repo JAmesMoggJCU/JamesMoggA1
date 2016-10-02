@@ -19,4 +19,10 @@ abstract class TrumpCard extends Card {
     public String getDescription() {
         return subtitle;
     }
+
+    abstract String getSpecific_gravity();
+
+    abstract String getCrustal_abundance();
+
+    abstract String getEconomic_value();
 }

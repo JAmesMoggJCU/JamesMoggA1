@@ -85,12 +85,27 @@ public class Deck {
                     }
 
                     @Override
+                    String getGravity() {
+                        return null;
+                    }
+
+                    @Override
                     String getSpecific_gravity() {
                         return null;
                     }
 
                     @Override
                     String getCleavage() {
+                        return null;
+                    }
+
+                    @Override
+                    String getCrustalAbundance() {
+                        return null;
+                    }
+
+                    @Override
+                    String getEconomicvalue() {
                         return null;
                     }
 

@@ -23,6 +23,7 @@ public class Game {
         Integer playersArrayIndex = 0;
         ArrayList<Players> winnerPile = new ArrayList<>();
 
+
         //System.out.println(deckInstance.deckArray.get(0).toString()); //testing if everything prints with deck
         //deckInstance.print();
         do {
@@ -54,6 +55,7 @@ public class Game {
                 } else CardsPile();
             }
         }
+
         Play.roundType = chooseType(Play.roundType);
         String gameOption;
         System.out.println("The type of round is:    " + Play.roundType);
@@ -67,7 +69,7 @@ public class Game {
                             CardsPile();
                             System.out.println("The type for the round is:   " + Play.roundType + "\n");
                             System.out.println(playersArray.get(i).getPlayer());
-                            Play.roundType = cardCompare(playersArray.get(i), Play.roundType, i, playersAmount);
+                            Play.roundType = cardCompare(playersArray.get(i), Play.roundType, i, playersArrayIndex);
                             if (playersArray.get(i).PlayerHand.size() == 0) {
                                 System.out.println("Congratulations " + playersArray.get(i).getPlayer() + " for emptying your hand \n");
                                 winnerPile.add(playersArray.get(i));
@@ -79,18 +81,27 @@ public class Game {
                             System.out.println(playersArray.get(i).getPlayer());
                             playersArray.get(i).inorOut = Boolean.FALSE;
                             Play.outCounter++;
-                            nextRound(playersAmount);
+                            nextRound(playersArrayIndex);
 
                         }
                     } while (!gameOption.equals("play") && !gameOption.equals("pass"));
                 }
             }
         }
+    }
+    static void nextRound(int playerAmountPlace) {
+        playerAmountPlace--;
+        if (Play.outCounter == playerAmountPlace) {
+            System.out.println("\n" + "-----------------------------------\n The current round has ended \n the new round will start now \n ----------------------------------- \n");
+            for (int i = 0; i < playersArray.size(); i++) {
+                playersArray.get(i).inorOut = Boolean.TRUE;
+            }
+            Play.roundType = chooseType(Play.roundType);
+            Play.outCounter = 0;
+        }
 
     }
-    static int nextRound(){
-        while
-    }
+
 
     static String chooseType(String TypeHolder) {
         Scanner input = new Scanner(System.in);
@@ -376,7 +387,7 @@ public class Game {
         deckInstance.deckArray.remove(0);
     }
 
-    static String cardCompare(Players playerPlace, String cardCompareType, int playerIndex) {
+    static String cardCompare(Players playerPlace, String cardCompareType, int playerIndex, Integer playersArrayIndex) {
         Integer handCardValue = -1;
         Integer CardPileValue;
         int cardHandIndex;
@@ -417,6 +428,7 @@ public class Game {
                     System.out.println(playerPlace.PlayerHand.remove(cardHandIndex) + " was removed from hand");
                 } else System.out.println("the cards value was not higher! Try again");
                 break;
+
             case "Gravity":
                 try {
                 handCardValue = getGravity(playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).getGravity());
