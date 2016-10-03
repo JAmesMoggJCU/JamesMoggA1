@@ -9,7 +9,7 @@ import org.xml.sax.*;
 import java.text.ParseException;
 import java.io.*;
 import java.util.*;
-
+import java.util.Collections;
 public class Game {
     static ArrayList<Card> centerCards;
     static Deck deckInstance;
@@ -28,8 +28,10 @@ public class Game {
         //deckInstance.print();
         // asks for how many players there are in the game
         do {
+
             System.out.println("Enter the number of players:   ");
             playersArrayIndex = input.nextInt();
+            Collections.shuffle(Game.deckInstance.deckArray);
         } while (playersArrayIndex > 5 || playersArrayIndex < 3);
         input.nextLine();
         for (int x = 0; x < playersArrayIndex; x = x + 1) {
