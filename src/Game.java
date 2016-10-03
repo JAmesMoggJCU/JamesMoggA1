@@ -26,6 +26,7 @@ public class Game {
 
         //System.out.println(deckInstance.deckArray.get(0).toString()); //testing if everything prints with deck
         //deckInstance.print();
+        // asks for how many players there are in the game
         do {
             System.out.println("Enter the number of players:   ");
             playersArrayIndex = input.nextInt();
@@ -33,7 +34,7 @@ public class Game {
         input.nextLine();
         for (int x = 0; x < playersArrayIndex; x = x + 1) {
             String playerName;
-            System.out.println("Enter players name:   ");
+            System.out.println("Enter players name:   "); // enters in players names
             playerName = input.nextLine();
             Players nextPlayer = new Players(playerName);
             while (nextPlayer.PlayerHand.size() < 8) {
@@ -42,6 +43,7 @@ public class Game {
             playersArray.add(nextPlayer);
             System.out.println(nextPlayer.getPlayer());
         }
+        // begins the round asking for first player to choose the type of round
         Play.roundType = chooseType(Play.roundType);
         String gameOption;
         System.out.println("The type of round is:    " + Play.roundType);
@@ -49,20 +51,20 @@ public class Game {
             for (int i = 0; i < playersArray.size(); i++) {
                 if (playersArray.get(i).inorOut) {
                     do {
-                        System.out.println("\n" + "Enter an option for player:   " + playersArray.get(i).Name + " \n play \n pass");
+                        System.out.println("\n" + "Enter an option for player:   " + playersArray.get(i).Name + " \n play \n pass");//asks player to play or pass
                         gameOption = input.nextLine().toLowerCase();
                         if (gameOption.equals("play")) {
                             CardsPile();
-                            System.out.println("The type for the round is:   " + Play.roundType + "\n");
+                            System.out.println("The type for the round is:   " + Play.roundType + "\n");// displays the round category
                             System.out.println(playersArray.get(i).getPlayer());
                             Play.roundType = cardCompare(playersArray.get(i), Play.roundType, i, playersArrayIndex);
                             if (playersArray.get(i).PlayerHand.size() == 0) {
-                                System.out.println("Congratulations " + playersArray.get(i).getPlayer() + " for emptying your hand \n");
+                                System.out.println("Congratulations " + playersArray.get(i).getPlayer() + " for emptying your hand \n");//when players have emptied there hand they get removed from playersArray and added to winnerpile
                                 winnerPile.add(playersArray.get(i));
                                 playersArray.remove(i);
                             }
 
-                        } else if (gameOption.equals("pass")) {
+                        } else if (gameOption.equals("pass")) {//that if a player passes they will draw a card to PlayerHand
                             drawCard(playersArray.get(i));
                             System.out.println(playersArray.get(i).getPlayer());
                             playersArray.get(i).inorOut = Boolean.FALSE;
@@ -75,7 +77,7 @@ public class Game {
             }
         }
     }
-
+    // will show when a new category has to be chosen by the first player
     static void nextRound(int playerAmountPlace) {
         playerAmountPlace--;
         if (Play.outCounter == playerAmountPlace) {
@@ -89,17 +91,17 @@ public class Game {
 
     }
 
-
+    // runs the player choosing what category the round will be in
     static String chooseType(String TypeHolder) {
         Scanner input = new Scanner(System.in);
         do {
             System.out.println("Enter the category to play: \n hardness \n specific gravity \n cleavage \n crustal abundance \n economic value   ");
-            TypeHolder = input.nextLine();
+            TypeHolder = input.nextLine().toLowerCase();
         }
         while (!TypeHolder.equals("hardness") && !TypeHolder.equals("specific gravity") && !TypeHolder.equals("cleavage") && !TypeHolder.equals("crustal abundance") && !TypeHolder.equals("economic value"));
         return TypeHolder;
     }
-
+    // holds the vlaues of the hardness category from string to integer
     static int getHardness(String hardness) {
         int HardnessValue = 0;
         switch (hardness) {
@@ -176,7 +178,7 @@ public class Game {
         }
         return HardnessValue;
     }
-
+    // holds the Gravity values from String to integer
     public static int getGravity(String Gravity) {
         int GravityValue = 0;
         switch (Gravity) {
@@ -279,7 +281,7 @@ public class Game {
         }
         return GravityValue;
     }
-
+    // holds the Cleavage vlaues from String to Integer
     public static int getCleavage(String Cleavage) {
         int CleavageValue = 0;
         switch (Cleavage) {
@@ -316,7 +318,7 @@ public class Game {
         }
         return CleavageValue;
     }
-
+    // holds the CrustalAbundance vlaues from String to Integer
     public static int getCrustalAbundance(String Crustal) {
         int CrustalAbundanceValue = 0;
         switch (Crustal) {
@@ -336,7 +338,7 @@ public class Game {
         }
         return CrustalAbundanceValue;
     }
-
+    // holds the Economic vlaues from String to Integer
     public static int getEconomicValue(String Economic) {
         int EconomicValueValue = 0;
         switch (Economic) {
@@ -355,7 +357,7 @@ public class Game {
         }
         return EconomicValueValue;
     }
-
+    // method that places a card from PlayerHand into the cardpile and removes it from PlayerHand
     static void placeCard(Players playerPlace) {
         int cardHandIndex;
         Scanner input = new Scanner(System.in);
@@ -364,7 +366,7 @@ public class Game {
         centerCards.add(playerPlace.PlayerHand.get(cardHandIndex));
         System.out.println(playerPlace.PlayerHand.remove(cardHandIndex) + " was removed from hand");
     }
-
+    //methd that displays what the cards in the center of the pile are
     static void CardsPile() {
         System.out.println("<Center Card Pile \n " + centerCards.toString());
     }
@@ -373,6 +375,7 @@ public class Game {
         playerPlace.PlayerHand.add(deckInstance.deckArray.get(0));
         deckInstance.deckArray.remove(0);
     }
+    //resets the round fro all players when a trump card is played
     static void trumpPlayerReset() {
         System.out.println("A trump card has been played everyone is back in the round now");
         for (int i = 0; i < playersArray.size(); i++) {
@@ -380,7 +383,7 @@ public class Game {
         }
         Play.outCounter = 0;
     }
-
+    // compares the cards values to determine if a card is larger category than the other
     static String cardCompare(Players playerPlace, String cardCompareType, int playerIndex, Integer playersArrayIndex) {
         Integer handCardValue = -1;
         Integer CardPileValue;
@@ -436,15 +439,21 @@ public class Game {
                     System.out.println("you have played " + playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title);
                     if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geologist")) {
                         cardCompareType = chooseType(cardCompareType).toLowerCase();
+                        trumpPlayerReset();
+                        handCardValue = 10;
                         break;
                     } else if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geophysicist") && playersArray.get(playerIndex).PlayerHand.toString().contains("Magnetite")) {
                         System.out.println("You have Magnetite in your hand! ");
                         while (playersArray.get(playerIndex).PlayerHand.size() != 0) {
                             playersArray.get(playerIndex).PlayerHand.remove(0);
                         }
+                        trumpPlayerReset();
                         break;
-                    } else {
+                    }
+                    else {
                         cardCompareType = playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).getDescription().toLowerCase();
+                        trumpPlayerReset();
+                        handCardValue = 10;
                         break;
                     }
                 }
@@ -469,15 +478,21 @@ public class Game {
                     System.out.println("you have played " + playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title);
                     if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geologist")) {
                         cardCompareType = chooseType(cardCompareType).toLowerCase();
+                        trumpPlayerReset();
+                        handCardValue = 10;
                         break;
                     } else if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geophysicist") && playersArray.get(playerIndex).PlayerHand.toString().contains("Magnetite")) {
                         System.out.println("You have Magnetite in your hand! ");
                         while (playersArray.get(playerIndex).PlayerHand.size() != 0) {
                             playersArray.get(playerIndex).PlayerHand.remove(0);
                         }
+                        trumpPlayerReset();
                         break;
-                    } else {
+                    }
+                    else {
                         cardCompareType = playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).getDescription().toLowerCase();
+                        trumpPlayerReset();
+                        handCardValue = 10;
                         break;
                     }
                 }
@@ -502,15 +517,21 @@ public class Game {
                     System.out.println("you have played " + playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title);
                     if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geologist")) {
                         cardCompareType = chooseType(cardCompareType).toLowerCase();
+                        trumpPlayerReset();
+                        handCardValue = 10;
                         break;
                     } else if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geophysicist") && playersArray.get(playerIndex).PlayerHand.toString().contains("Magnetite")) {
                         System.out.println("You have Magnetite in your hand! ");
                         while (playersArray.get(playerIndex).PlayerHand.size() != 0) {
                             playersArray.get(playerIndex).PlayerHand.remove(0);
                         }
+                        trumpPlayerReset();
                         break;
-                    } else {
+                    }
+                    else {
                         cardCompareType = playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).getDescription().toLowerCase();
+                        trumpPlayerReset();
+                        handCardValue = 10;
                         break;
                     }
                 }
@@ -535,15 +556,21 @@ public class Game {
                     System.out.println("you have played " + playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title);
                     if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geologist")) {
                         cardCompareType = chooseType(cardCompareType).toLowerCase();
+                        trumpPlayerReset();
+                        handCardValue = 10;
                         break;
                     } else if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geophysicist") && playersArray.get(playerIndex).PlayerHand.toString().contains("Magnetite")) {
                         System.out.println("You have Magnetite in your hand! ");
                         while (playersArray.get(playerIndex).PlayerHand.size() != 0) {
                             playersArray.get(playerIndex).PlayerHand.remove(0);
                         }
+                        trumpPlayerReset();
                         break;
-                    } else {
+                    }
+                    else {
                         cardCompareType = playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).getDescription().toLowerCase();
+                        trumpPlayerReset();
+                        handCardValue = 10;
                         break;
                     }
                 }
