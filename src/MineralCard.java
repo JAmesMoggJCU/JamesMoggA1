@@ -63,7 +63,7 @@ abstract class MineralCard extends Card {
         return crustal_abundance;
     }
 
-    public String getEconomicvalue() {
+    public String getEconomic_value() {
         return economic_value;
     }
 

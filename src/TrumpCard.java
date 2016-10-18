@@ -14,7 +14,7 @@ abstract class TrumpCard extends Card {
 
     @Override
     public String toString() {
-        return ("This Trump Card is\n " + this.title + "\n its description is\n " + this.subtitle);
+        return ("\n" + "This Trump Card is\n " + this.title + "\n its description is\n " + this.subtitle);
     }
     public String getDescription() {
         return subtitle;

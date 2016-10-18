@@ -359,16 +359,6 @@ public class Game {
         }
         return EconomicValueValue;
     }
-    // method that places a card from PlayerHand into the cardpile and removes it from PlayerHand
-    static void placeCard(Players playerPlace) {
-        int cardHandIndex;
-        Scanner input = new Scanner(System.in);
-        System.out.println("type the number of the card you want to play:    ");
-        cardHandIndex = input.nextInt();
-        centerCards.add(playerPlace.PlayerHand.get(cardHandIndex));
-        System.out.println(playerPlace.PlayerHand.remove(cardHandIndex) + " was removed from hand");
-    }
-    //methd that displays what the cards in the center of the pile are
     static void CardsPile() {
         System.out.println("<Center Card Pile \n " + centerCards.toString());
     }
@@ -387,11 +377,13 @@ public class Game {
     }
     // compares the cards values to determine if a card is larger category than the other
     static String cardCompare(Players playerPlace, String cardCompareType, int playerIndex, Integer playersArrayIndex) {
-        Integer handCardValue = -1;
-        Integer CardPileValue;
-        int cardHandIndex;
+        Integer handCardValue = null;
+        Integer CardPileValue = null;
+        int cardHandIndex = 0;
         Scanner input = new Scanner(System.in);
         System.out.println("type the number of the card you wish to place:    ");
+        centerCards.add(playerPlace.PlayerHand.get(cardHandIndex));
+        playersArray.remove(playerPlace.PlayerHand.remove(cardHandIndex));
         cardHandIndex = input.nextInt();
         switch (cardCompareType) {
             case "hardness":
@@ -399,6 +391,8 @@ public class Game {
                     handCardValue = getHardness(playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).getHardness());
                 } catch (NullPointerException a) {
                     System.out.println("you have played " + playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title);
+                    centerCards.add(playerPlace.PlayerHand.get(cardHandIndex));
+                    System.out.println(playerPlace.PlayerHand.remove(cardHandIndex));
                     if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geologist")) {
                         cardCompareType = chooseType(cardCompareType).toLowerCase();
                         trumpPlayerReset();
@@ -429,8 +423,6 @@ public class Game {
 
                 if (handCardValue > CardPileValue) {
                     System.out.println("the card has a higher value");
-                    centerCards.add(playerPlace.PlayerHand.get(cardHandIndex));
-                    System.out.println(playerPlace.PlayerHand.remove(cardHandIndex) + " was removed from hand");
                 } else System.out.println("the cards value was not higher! Try again");
                 break;
 
@@ -439,6 +431,8 @@ public class Game {
                 handCardValue = getGravity(playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).getGravity());
                 } catch (NullPointerException a) {
                     System.out.println("you have played " + playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title);
+                    centerCards.add(playerPlace.PlayerHand.get(cardHandIndex));
+                    System.out.println(playerPlace.PlayerHand.remove(cardHandIndex));
                     if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geologist")) {
                         cardCompareType = chooseType(cardCompareType).toLowerCase();
                         trumpPlayerReset();
@@ -460,7 +454,7 @@ public class Game {
                     }
                 }
                 try {
-                    CardPileValue = getHardness(centerCards.get(0).getGravity());
+                    CardPileValue = getGravity(centerCards.get(0).getGravity());
 
                 } catch (IndexOutOfBoundsException b) {
                     System.out.println("there was no card on the pile you. may place your card");
@@ -478,6 +472,8 @@ public class Game {
                     handCardValue = getCleavage(playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).getCleavage());
                 } catch (NullPointerException a) {
                     System.out.println("you have played " + playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title);
+                    centerCards.add(playerPlace.PlayerHand.get(cardHandIndex));
+                    System.out.println(playerPlace.PlayerHand.remove(cardHandIndex));
                     if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geologist")) {
                         cardCompareType = chooseType(cardCompareType).toLowerCase();
                         trumpPlayerReset();
@@ -499,7 +495,7 @@ public class Game {
                     }
                 }
                 try {
-                    CardPileValue = getHardness(centerCards.get(0).getCleavage());
+                    CardPileValue = getCleavage(centerCards.get(0).getCleavage());
 
                 } catch (IndexOutOfBoundsException b) {
                     System.out.println("there was no card on the pile you. may place your card");
@@ -517,6 +513,8 @@ public class Game {
                     handCardValue = getCrustalAbundance(playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).getCrustalAbundance());
                 } catch (NullPointerException a) {
                     System.out.println("you have played " + playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title);
+                    centerCards.add(playerPlace.PlayerHand.get(cardHandIndex));
+                    System.out.println(playerPlace.PlayerHand.remove(cardHandIndex));
                     if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geologist")) {
                         cardCompareType = chooseType(cardCompareType).toLowerCase();
                         trumpPlayerReset();
@@ -538,7 +536,7 @@ public class Game {
                     }
                 }
                 try {
-                    CardPileValue = getHardness(centerCards.get(0).getCrustalAbundance());
+                    CardPileValue = getCrustalAbundance(centerCards.get(0).getCrustalAbundance());
 
                 } catch (IndexOutOfBoundsException b) {
                     System.out.println("there was no card on the pile you. may place your card");
@@ -556,6 +554,8 @@ public class Game {
                     handCardValue = getEconomicValue(playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).getEconomicvalue());
                 } catch (NullPointerException a) {
                     System.out.println("you have played " + playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title);
+                    centerCards.add(playerPlace.PlayerHand.get(cardHandIndex));
+                    System.out.println(playerPlace.PlayerHand.remove(cardHandIndex));
                     if (playersArray.get(playerIndex).PlayerHand.get(cardHandIndex).title.equals("The Geologist")) {
                         cardCompareType = chooseType(cardCompareType).toLowerCase();
                         trumpPlayerReset();
@@ -577,7 +577,7 @@ public class Game {
                     }
                 }
                 try {
-                    CardPileValue = getHardness(centerCards.get(0).getEconomicvalue());
+                    CardPileValue = getEconomicValue(centerCards.get(0).getEconomicvalue());
 
                 } catch (IndexOutOfBoundsException b) {
                     System.out.println("there was no card on the pile you. may place your card");

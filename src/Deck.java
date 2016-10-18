@@ -44,6 +44,11 @@ public class Deck {
 
                 deckArray.add(new MineralCard(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9) {
                     @Override
+                    String getEconomicvalue() {
+                        return null;
+                    }
+
+                    @Override
                     String getDescription() {
                         return null;
                     }
